@@ -1,0 +1,7 @@
+metropolis
+  ✓︎ is superman
+gotham city
+  ✓︎ is time for revenge
+
+Summary
+2/2 tests passed

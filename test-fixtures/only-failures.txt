@@ -1,0 +1,11 @@
+metropolis
+  ✗ is a bird:
+
+  true ≠ false
+gotham city
+  ✗ is a dark night:
+
+  1 ≠ 2
+
+Summary
+0/2 tests passed

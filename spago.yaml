@@ -1,0 +1,25 @@
+workspace:
+  packageSet:
+    registry: 56.2.0
+  extraPackages: {}
+
+package:
+  name: spec-node
+  dependencies:
+    - argonaut-codecs
+    - argonaut-core
+    - argonaut-generic
+    - arrays
+    - console
+    - effect
+    - node-fs
+    - optparse
+    - prelude
+    - spec
+  test:
+    main: Test.Main
+    dependencies:
+      - debug
+      - node-buffer
+      - node-child-process
+      - node-execa

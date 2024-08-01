@@ -1,0 +1,16 @@
+metropolis
+  ✗ is a bird:
+
+  true ≠ false
+  ✓︎ is a plane
+  ✗ is superman:
+
+  test timed out after 1000ms
+gotham city
+  ✗ is a dark night:
+
+  1 ≠ 2
+  ✓︎ is time for revenge
+
+Summary
+2/5 tests passed

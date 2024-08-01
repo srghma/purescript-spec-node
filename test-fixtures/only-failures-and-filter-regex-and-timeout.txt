@@ -1,0 +1,10 @@
+metropolis
+  ✗ is a bird:
+
+  true ≠ false
+  ✗ is superman:
+
+  test timed out after 1000ms
+
+Summary
+0/2 tests passed

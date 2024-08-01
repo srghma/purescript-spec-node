@@ -1,0 +1,14 @@
+metropolis
+  ✗ is a bird:
+
+  true ≠ false
+  ✓︎ is a plane
+  ✓︎ is superman
+gotham city
+  ✗ is a dark night:
+
+  1 ≠ 2
+  ✓︎ is time for revenge
+
+Summary
+3/5 tests passed

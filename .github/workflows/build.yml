@@ -1,0 +1,65 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.image }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+          - os: macOS-latest
+          - os: windows-latest
+    steps:
+      # We set LF endings so that the Windows environment is consistent with the rest
+      # See here for context: https://github.com/actions/checkout/issues/135
+      - name: Set git to use LF
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+          git config --global core.longpaths true
+
+      - uses: actions/checkout@v4
+
+      - name: Setup node and npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Cache PureScript dependencies
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-spago-${{ hashFiles('**/spago.yaml') }}
+          path: |
+            .spago
+            output
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Install PureScript dependencies
+        run: npx spago install
+
+      - name: Build the project
+        run: npx spago build
+
+      - name: Run tests
+        run: npx spago test

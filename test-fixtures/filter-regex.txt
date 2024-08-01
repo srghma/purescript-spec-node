@@ -1,0 +1,6 @@
+metropolis
+  ✓︎ is a plane
+  ✓︎ is superman
+
+Summary
+2/2 tests passed
