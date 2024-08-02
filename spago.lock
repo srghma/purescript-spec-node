@@ -3,16 +3,31 @@ workspace:
     spec-node:
       path: ./
       dependencies:
-        - argonaut-codecs
-        - argonaut-core
-        - argonaut-generic
-        - arrays
-        - console
-        - effect
-        - node-fs
-        - optparse
-        - prelude
-        - spec
+        - aff: ">=7.1.0 <8.0.0"
+        - argonaut-codecs: ">=9.1.0 <10.0.0"
+        - argonaut-core: ">=7.0.0 <8.0.0"
+        - arrays: ">=7.3.0 <8.0.0"
+        - control: ">=6.0.0 <7.0.0"
+        - datetime: ">=6.1.0 <7.0.0"
+        - effect: ">=4.0.0 <5.0.0"
+        - either: ">=6.1.0 <7.0.0"
+        - foldable-traversable: ">=6.0.0 <7.0.0"
+        - identity: ">=6.0.0 <7.0.0"
+        - integers: ">=6.0.0 <7.0.0"
+        - maybe: ">=6.0.0 <7.0.0"
+        - newtype: ">=5.0.0 <6.0.0"
+        - node-buffer: ">=9.0.0 <10.0.0"
+        - node-fs: ">=9.2.0 <10.0.0"
+        - node-process: ">=11.2.0 <12.0.0"
+        - now: ">=6.0.0 <7.0.0"
+        - numbers: ">=9.0.1 <10.0.0"
+        - optparse: ">=5.0.1 <6.0.0"
+        - ordered-collections: ">=3.2.0 <4.0.0"
+        - partial: ">=4.0.0 <5.0.0"
+        - prelude: ">=6.0.1 <7.0.0"
+        - spec: ">=7.6.1 <8.0.0"
+        - strings: ">=6.0.1 <7.0.0"
+        - tuples: ">=7.0.0 <8.0.0"
       test_dependencies:
         - debug
         - node-buffer
@@ -23,7 +38,6 @@ workspace:
         - ansi
         - argonaut-codecs
         - argonaut-core
-        - argonaut-generic
         - arraybuffer-types
         - arrays
         - avar
@@ -604,7 +618,8 @@ workspace:
       yoga-tree: 1.0.0
       z3: 0.0.2
       zipperarray: 2.0.0
-  extra_packages: {}
+  extra_packages:
+    parallel: 6.0.0
 packages:
   aff:
     type: registry
@@ -668,15 +683,6 @@ packages:
       - prelude
       - strings
       - tailrec
-  argonaut-generic:
-    type: registry
-    version: 8.0.0
-    integrity: sha256-WCqRWoomRKg5BFZnGBS4k4SqBX84fy/X1aJzMyaIeP0=
-    dependencies:
-      - argonaut-codecs
-      - argonaut-core
-      - prelude
-      - record
   arraybuffer-types:
     type: registry
     version: 3.0.2
@@ -1339,8 +1345,8 @@ packages:
       - prelude
   parallel:
     type: registry
-    version: 7.0.0
-    integrity: sha256-gUC9i4Txnx9K9RcMLsjujbwZz6BB1bnE2MLvw4GIw5o=
+    version: 6.0.0
+    integrity: sha256-VJbkGD0rAKX+NUEeBJbYJ78bEKaZbgow+QwQEfPB6ko=
     dependencies:
       - control
       - effect
