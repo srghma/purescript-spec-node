@@ -31,7 +31,6 @@ import Data.Tuple (fst)
 import Data.Tuple.Nested ((/\))
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Class (class MonadEffect, liftEffect)
-import Options.Applicative ((<**>))
 import Options.Applicative as Opt
 import Partial (crashWith)
 import Partial.Unsafe (unsafePartial)
@@ -58,8 +57,11 @@ fromCommandLine = fromCommandLine' defaultConfig commandLineOptionParsers
 
 fromCommandLine' :: ∀ m a. MonadEffect m => a -> Array (OptionParser a) -> m a
 fromCommandLine' defaultCfg options =
-  liftEffect (Opt.execParser $ optionParser options) <#>
+  liftEffect (Opt.customExecParser prefs $ optionParser options) <#>
     \f -> f defaultCfg
+  where
+    prefs = Opt.defaultPrefs # \(Opt.ParserPrefs p) ->
+      Opt.ParserPrefs p { prefShowHelpOnError = true }
 
 defaultConfig :: TestRunConfig
 defaultConfig =
@@ -157,6 +159,7 @@ timeout :: ∀ r. OptionParser { timeout :: Maybe Milliseconds | r }
 timeout = ado
   seconds <- optional $ Opt.option Opt.int $ fold
     [ Opt.long "timeout"
+    , Opt.metavar "SECONDS"
     , Opt.help "timeout for each individual test case, in seconds."
     ]
 
@@ -178,8 +181,8 @@ filterByName = ado
   pat <- optional $ Opt.strOption $ fold
     [ Opt.long "example"
     , Opt.short 'e'
-    , Opt.metavar "PATTERN"
-    , Opt.help "filter test cases by full name. Matching is case-sensitive."
+    , Opt.metavar "TEXT"
+    , Opt.help "run only tests whose full names contain the given text. Matching is case-sensitive."
     ]
 
   let f = pat <#> \s -> Str.toLower >>> Str.contains (Str.Pattern $ Str.toLower s)
@@ -193,7 +196,7 @@ filterByRegex = ado
     , Opt.short 'E'
     , Opt.metavar "REGEX"
     , Opt.help """
-        filter test cases by regular expression.
+        run only tests whose full names match the given regex.
         This will unapologetically crash if the provided regex doesn't compile.
         The regex is case-insensitive.
       """
@@ -208,8 +211,8 @@ filterByRegex = ado
 
 optionParser :: ∀ a. Array (OptionParser a) -> Opt.ParserInfo (a -> a)
 optionParser options =
-  Opt.info (combined <**> Opt.helper) $
+  Opt.info (Opt.helper <*> combined) $
     Opt.fullDesc
-    <> Opt.header "CollegeVine’s very own PureScript test runner."
+    <> Opt.header "PureScript Spec test runner for Node"
   where
     combined = foldl combineOptionParsers emptyOptionParser options
