@@ -50,6 +50,10 @@ type TestRunConfigRow r =
 type TestRunConfig' r = { | TestRunConfigRow r }
 type TestRunConfig = TestRunConfig' ()
 
+-- | A CLI option parser is implemented as a function that _modifies_ the result
+-- | rather than returning it. This way we can run multiple parsers in sequence
+-- | and accumulate the changes on top of defaults, while keeping the result an
+-- | open (extensible) record.
 type OptionParser a = Opt.Parser (a -> a)
 
 fromCommandLine :: ∀ m. MonadEffect m => m TestRunConfig
@@ -71,6 +75,9 @@ defaultConfig =
   , timeout: Just $ Milliseconds 10_000.0
   }
 
+-- | The set of default parsers provided in the box. If you're using your own
+-- | parsers for your own CLI options, concatenate them to this array before
+-- | passing to `fromCommandLine'`.
 commandLineOptionParsers :: ∀ r. Array (OptionParser (TestRunConfig' r))
 commandLineOptionParsers =
   [ failFast
@@ -82,6 +89,9 @@ commandLineOptionParsers =
   , noTimeout
   ]
 
+-- | Converts the `spec-node` configuration to `spec` configuration. The two are
+-- | not the same, because this very conversion is an effectful operation, as,
+-- | for example, it depends on the last test run results.
 toSpecConfig :: ∀ m r. MonadAff m => TestRunConfig' r -> m Spec.Config
 toSpecConfig cfg = do
   filters <- catMaybes <$> sequence [filterToFailures, explicitFilter]

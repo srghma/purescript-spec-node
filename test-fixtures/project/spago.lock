@@ -2,90 +2,91 @@ workspace:
   packages:
     test-fixture:
       path: ./
-      dependencies:
-        - console
-        - effect
-        - prelude
-        - spec-node
-      test_dependencies: []
-      build_plan:
-        - aff
-        - ansi
-        - argonaut-codecs
-        - argonaut-core
-        - argonaut-generic
-        - arraybuffer-types
-        - arrays
-        - avar
-        - bifunctors
-        - catenable-lists
-        - console
-        - const
-        - contravariant
-        - control
-        - datetime
-        - distributive
-        - effect
-        - either
-        - enums
-        - exceptions
-        - exists
-        - exitcodes
-        - foldable-traversable
-        - foreign
-        - foreign-object
-        - fork
-        - free
-        - functions
-        - functors
-        - gen
-        - identity
-        - integers
-        - invariant
-        - js-date
-        - lazy
-        - lists
-        - maybe
-        - mmorph
-        - newtype
-        - node-buffer
-        - node-event-emitter
-        - node-fs
-        - node-path
-        - node-process
-        - node-streams
-        - nonempty
-        - now
-        - nullable
-        - numbers
-        - open-memoize
-        - optparse
-        - ordered-collections
-        - orders
-        - parallel
-        - partial
-        - pipes
-        - posix-types
-        - prelude
-        - profunctor
-        - psci-support
-        - record
-        - refs
-        - safe-coerce
-        - spec
-        - spec-node
-        - st
-        - strings
-        - tailrec
-        - transformers
-        - tuples
-        - type-equality
-        - typelevel-prelude
-        - unfoldable
-        - unsafe-coerce
+      core:
+        dependencies:
+          - console
+          - effect
+          - prelude
+          - spec-node
+        build_plan:
+          - aff
+          - ansi
+          - argonaut-codecs
+          - argonaut-core
+          - arraybuffer-types
+          - arrays
+          - avar
+          - bifunctors
+          - catenable-lists
+          - console
+          - const
+          - contravariant
+          - control
+          - datetime
+          - distributive
+          - effect
+          - either
+          - enums
+          - exceptions
+          - exists
+          - exitcodes
+          - foldable-traversable
+          - foreign
+          - foreign-object
+          - fork
+          - free
+          - functions
+          - functors
+          - gen
+          - identity
+          - integers
+          - invariant
+          - js-date
+          - lazy
+          - lists
+          - maybe
+          - mmorph
+          - newtype
+          - node-buffer
+          - node-event-emitter
+          - node-fs
+          - node-path
+          - node-process
+          - node-streams
+          - nonempty
+          - now
+          - nullable
+          - numbers
+          - open-memoize
+          - optparse
+          - ordered-collections
+          - orders
+          - parallel
+          - partial
+          - pipes
+          - posix-types
+          - prelude
+          - profunctor
+          - record
+          - refs
+          - safe-coerce
+          - spec
+          - spec-node
+          - st
+          - strings
+          - tailrec
+          - transformers
+          - tuples
+          - type-equality
+          - typelevel-prelude
+          - unfoldable
+          - unsafe-coerce
+      test:
+        dependencies: []
+        build_plan: []
   package_set:
     address:
-      registry: 56.2.0
+      registry: 59.0.0
     compiler: ">=0.15.15 <0.16.0"
     content:
       abc-parser: 2.0.1
@@ -150,7 +151,7 @@ workspace:
       classnames: 2.0.0
       codec: 6.1.0
       codec-argonaut: 10.0.0
-      codec-json: 1.2.0
+      codec-json: 2.0.0
       colors: 7.0.1
       concur-core: 0.5.0
       concur-react: 0.5.0
@@ -240,7 +241,7 @@ workspace:
       generate-values: 1.0.1
       generic-router: 0.0.1
       geojson: 0.0.5
-      geometria: 2.1.0
+      geometria: 2.2.0
       gojs: 0.1.1
       grain: 3.0.0
       grain-router: 3.0.0
@@ -253,7 +254,7 @@ workspace:
       halogen-css: 10.0.0
       halogen-echarts-simple: 0.0.4
       halogen-formless: 4.0.3
-      halogen-helix: 1.0.0
+      halogen-helix: 1.0.1
       halogen-hooks: 0.6.3
       halogen-hooks-extra: 0.9.0
       halogen-infinite-scroll: 1.1.0
@@ -374,15 +375,17 @@ workspace:
       now: 6.0.0
       npm-package-json: 2.0.0
       nullable: 6.0.0
-      numberfield: 0.2.1
+      numberfield: 0.2.2
       numbers: 9.0.1
       oak: 3.1.1
       oak-debug: 1.2.2
       object-maps: 0.3.0
       ocarina: 1.5.4
-      open-folds: 6.3.0
-      open-memoize: 6.1.0
-      open-pairing: 6.1.0
+      oooooooooorrrrrrrmm-lib: 0.0.1
+      open-folds: 6.4.0
+      open-memoize: 6.2.0
+      open-mkdirp-aff: 1.2.0
+      open-pairing: 6.2.0
       options: 7.0.0
       optparse: 5.0.1
       ordered-collections: 3.2.0
@@ -405,12 +408,12 @@ workspace:
       pointed-list: 0.5.1
       polymorphic-vectors: 4.0.0
       posix-types: 6.0.0
-      postgresql: 2.0.17
+      postgresql: 2.0.19
       precise: 6.0.0
       precise-datetime: 7.0.0
       prelude: 6.0.1
       prettier-printer: 3.0.0
-      priority-queue: 0.1.0
+      priority-queue: 0.1.2
       profunctor: 6.0.1
       profunctor-lenses: 8.0.0
       protobuf: 4.3.0
@@ -482,9 +485,10 @@ workspace:
       soundfonts: 4.1.0
       sparse-matrices: 2.0.1
       sparse-polynomials: 3.0.1
-      spec: 7.6.1
+      spec: 8.0.0
       spec-discovery: 8.3.0
       spec-mocha: 5.1.1
+      spec-node: 0.0.1
       spec-quickcheck: 5.0.2
       spec-reporter-xunit: 0.7.1
       splitmix: 2.1.0
@@ -509,6 +513,7 @@ workspace:
       thermite-dom: 0.3.1
       these: 6.0.0
       threading: 0.0.3
+      tldr: 0.0.0
       toestand: 0.9.0
       transformation-matrix: 1.0.1
       transformers: 6.1.0
@@ -550,7 +555,7 @@ workspace:
       vectors: 2.1.0
       versions: 7.0.0
       visx: 0.0.2
-      web-clipboard: 5.0.0
+      web-clipboard: 6.0.0
       web-cssom: 2.0.0
       web-cssom-view: 0.1.0
       web-dom: 6.0.0
@@ -652,15 +657,6 @@ packages:
       - prelude
       - strings
       - tailrec
-  argonaut-generic:
-    type: registry
-    version: 8.0.0
-    integrity: sha256-WCqRWoomRKg5BFZnGBS4k4SqBX84fy/X1aJzMyaIeP0=
-    dependencies:
-      - argonaut-codecs
-      - argonaut-core
-      - prelude
-      - record
   arraybuffer-types:
     type: registry
     version: 3.0.2
@@ -1141,11 +1137,9 @@ packages:
       - maybe
   open-memoize:
     type: registry
-    version: 6.1.0
-    integrity: sha256-ws/Cix/wgUKvrbPPxTqDSGCPpkTIvP1adTYLHAquBC4=
+    version: 6.2.0
+    integrity: sha256-p1m7wF3aHQ80yUvqMs20OTMl496WS6YpKlmI2Nkg9j0=
     dependencies:
-      - console
-      - effect
       - either
       - integers
       - lazy
@@ -1153,7 +1147,6 @@ packages:
       - maybe
       - partial
       - prelude
-      - psci-support
       - strings
       - tuples
   optparse:
@@ -1272,14 +1265,6 @@ packages:
       - newtype
       - prelude
       - tuples
-  psci-support:
-    type: registry
-    version: 6.0.0
-    integrity: sha256-C6ql4P9TEP06hft/1Z5QumPA4yARR4VIxDdhmL1EO+Y=
-    dependencies:
-      - console
-      - effect
-      - prelude
   record:
     type: registry
     version: 4.0.0
@@ -1303,8 +1288,8 @@ packages:
       - unsafe-coerce
   spec:
     type: registry
-    version: 7.6.1
-    integrity: sha256-VycY2SgN8rHZGqcMqZEiTh9OdCw40CUMX2pCoSUJ/zY=
+    version: 8.0.0
+    integrity: sha256-Yn7MhDai1YULlQF45+9FTOTf2rcjoda1Jf2IrEFCoeg=
     dependencies:
       - aff
       - ansi
@@ -1337,16 +1322,31 @@ packages:
     type: local
     path: ../..
     dependencies:
+      - aff
       - argonaut-codecs
       - argonaut-core
-      - argonaut-generic
       - arrays
-      - console
+      - control
+      - datetime
       - effect
+      - either
+      - foldable-traversable
+      - identity
+      - integers
+      - maybe
+      - newtype
+      - node-buffer
       - node-fs
+      - node-process
+      - now
+      - numbers
       - optparse
+      - ordered-collections
+      - partial
       - prelude
       - spec
+      - strings
+      - tuples
   st:
     type: registry
     version: 6.2.0

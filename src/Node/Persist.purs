@@ -67,7 +67,6 @@ persistResults trees = do
               Spec.Failure _ -> false
           }
 
-
 lastPersistedResults :: Aff TestRunResults
 lastPersistedResults = readFile `catchError` \_ -> pure Map.empty
   where

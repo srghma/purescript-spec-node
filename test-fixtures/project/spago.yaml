@@ -10,6 +10,6 @@ package:
     dependencies: []
 workspace:
   packageSet:
-    registry: 56.2.0
+    registry: 59.0.0
   extraPackages:
     spec-node: { path: "../.." }
