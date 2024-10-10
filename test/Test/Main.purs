@@ -9,6 +9,8 @@ import Data.String.Regex (replace) as Regex
 import Data.String.Regex.Flags (global) as Regex
 import Data.String.Regex.Unsafe (unsafeRegex) as Regex
 import Effect (Effect)
+import Effect.Aff (Aff)
+import Effect.Class.Console (log)
 import Node.ChildProcess.Types (Exit(..), inherit, pipe)
 import Node.Encoding (Encoding(..))
 import Node.FS.Aff as FS
@@ -18,7 +20,14 @@ import Node.Process (platform)
 import Test.Spec as Spec
 import Test.Spec.Assertions (fail)
 import Test.Spec.Reporter (consoleReporter)
-import Test.Spec.Runner.Node (runSpecAndExitProcess)
+import Test.Spec.Runner.Node (runSpecAndExitProcess, runSpecAndExitProcessM')
+import Test.Spec.Runner.Node.Config as Cfg
+
+mainShouldCompile :: Effect Unit
+mainShouldCompile = runSpecAndExitProcessM' join { defaultConfig: Cfg.defaultConfig, parseCLIOptions: false } [consoleReporter] $
+  Spec.beforeAll (log "Before all tests" :: Aff Unit) do
+    Spec.it "aff test" do
+      log "some test"
 
 main :: Effect Unit
 main = runSpecAndExitProcess [consoleReporter] $
