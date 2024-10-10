@@ -1,7 +1,6 @@
 module Test.Main where
 
 import Prelude
-
 import Data.Array (intercalate)
 import Data.Maybe (Maybe(..))
 import Data.String (trim)
@@ -9,7 +8,7 @@ import Data.String.Regex (replace) as Regex
 import Data.String.Regex.Flags (global) as Regex
 import Data.String.Regex.Unsafe (unsafeRegex) as Regex
 import Effect (Effect)
-import Effect.Aff (Aff)
+import Effect.Aff (Aff, launchAff_)
 import Effect.Class.Console (log)
 import Node.ChildProcess.Types (Exit(..), inherit, pipe)
 import Node.Encoding (Encoding(..))
@@ -20,14 +19,15 @@ import Node.Process (platform)
 import Test.Spec as Spec
 import Test.Spec.Assertions (fail)
 import Test.Spec.Reporter (consoleReporter)
-import Test.Spec.Runner.Node (runSpecAndExitProcess, runSpecAndExitProcessM')
 import Test.Spec.Runner.Node.Config as Cfg
+import Test.Spec.Runner.Node (runSpecAndExitProcess, runSpecAndExitProcessM)
 
 mainShouldCompile :: Effect Unit
-mainShouldCompile = runSpecAndExitProcessM' join { defaultConfig: Cfg.defaultConfig, parseCLIOptions: false } [consoleReporter] $
-  Spec.beforeAll (log "Before all tests" :: Aff Unit) do
-    Spec.it "aff test" do
-      log "some test"
+mainShouldCompile = launchAff_ do
+  join =<< runSpecAndExitProcessM { defaultConfig: Cfg.defaultConfig, parseCLIOptions: false } [consoleReporter] do
+    Spec.beforeAll (log "Before all tests" :: Aff Unit) do
+      Spec.it "aff test" do
+        log "some test"
 
 main :: Effect Unit
 main = runSpecAndExitProcess [consoleReporter] $
